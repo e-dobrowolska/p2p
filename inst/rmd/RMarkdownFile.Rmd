@@ -1,0 +1,34 @@
+---
+title: "RMarkdownFile"
+author: "Ewa Dobrowolska"
+date: "7 06 2022"
+output: html_document
+---
+
+With this wonderful tool you can easily aggregate points, polygons and lines derived from OpenStreetMaps, and save the final result in the desired form. At first, you need to upload the spatial data you will be working with - an object of class **SpatialPolygons**, **SpatialGrid** or alike, if you wish to aggregate data to your polygons level (eg. count how many railway stations are there in Warsaw)  or of class **SpatialPoints** or alike, if you wish to know local characteristics of your points' neighbourhood (eg. calculate how many convenience stores are located no further than 500 meters from the faculty).
+Upload all the files you have at once, accepted file extensions are: `.shp`,`.dbf`,`.sbn`,`.sbx`, `.shx`, `.prj`.
+
+---
+
+#### The possibilities for data aggregation:
+- **Points to polygons:** calculate how many `points` objects are located within each polygon you have uploaded. If you wish to consider only points located outside polygons, please check the `Outside polygons?` checkbox.  
+- **Polygons to polygons - area:** calculate the total area of the `polygon` objects within each polygon you have uploaded. 
+- **Polygons to polygons - intersection:** calculate how many `polygon` objects intersect with each polygon you have uploaded.If you wish to consider only large polygons, please provide the desired threshold value in the `Minimum polygon size` field.     
+- **Polygons to polygons - distance:** calculate the distance between the polygons you have uploaded and the nearest `polygon` object of desired type. If you wish to consider only large polygons, please provide the desired threshold value in the `Minimum polygon size` field.      
+- **Lines to polygons:** calculate the total length of the `lines` objects within each polygon you have uploaded.   
+- **Points to points:** calculate how many `points` objects are located within a given radius from each point you have uploaded,  
+- **Polygons to points - area:** calculate the total area of the `polygon` objects located within a given radius of the points you have uploaded. 
+- **Polygons to points - intersection:** calculate how many `polygon` objects intersect with the neighbourhoods' of a given `radius` from the points you have uploaded. If you wish to consider only large polygons, please provide the desired threshold value in the `Minimum polygon size` field.     
+- **Polygons to points - distance:** calculate the distance between the points you have uploaded and the nearest `polygon` object of desired type. If you wish to consider only large polygons, please provide desired threshold value in the `Minimum polygon size` field.      
+- **Lines to points:** calculate the total length of the `lines` objects located within a given radius from each point you have uploaded.  
+
+---
+
+#### Note:
+(1) Providing `key` and `value` corresponding to **OpenStreetMap** feaures is also necessary.  
+(2) Variable `sleep time` indicates waiting time in seconds before deriving the next feature from OpenStreetMaps; increasing its value might solve some problems with accesing the OSM server.  
+(3) If you check the variable `binary` the results will take values 0-1 for each observation (eg. you will not know how many restaurants there are in each polygon, only if there is any (value 1) or there is none (value 0))  
+(4) Providing variable `radius` is necessary only in case of point data aggregation (i.e. `points to points`, `polygons to points` and `lines to points`). 
+(5) If you check the `include multiobjects?` checkbox, multipolygons will be decoded into polygons, and multilines into linestrings, and then included into analysis (eg. **Polygons to points - distance** will calculate the minimum distance eather to the nearest polygon or the nearest multipolygon).
+
+---
